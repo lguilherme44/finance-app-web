@@ -2,7 +2,9 @@
   "name": "gvmoney",
   "version": "0.1.0",
   "private": true,
-  "engines": {"node": "14"},
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@reduxjs/toolkit": "^1.7.1",
