@@ -6,6 +6,6 @@ export function formatToBRL(value: number) {
       });
       return result;
    } else {
-      return value;
+      return `R$ 0,00`;
    }
 }

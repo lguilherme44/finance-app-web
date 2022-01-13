@@ -45,6 +45,8 @@ export function AuthProvider({ children }: AuthProver) {
 
       const { token, user } = response.data;
 
+      setUser(user);
+
       localStorage.setItem('@appFinance:token', token);
 
       api.defaults.headers.common.authorization = `Bearer ${token}`;
