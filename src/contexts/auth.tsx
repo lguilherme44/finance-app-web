@@ -45,21 +45,20 @@ export function AuthProvider({ children }: AuthProver) {
 
       const { token, user } = response.data;
 
-      localStorage.setItem('@dowhile:token', token);
+      localStorage.setItem('@appFinance:token', token);
 
       api.defaults.headers.common.authorization = `Bearer ${token}`;
 
-      setUser(user);
       setIsLoading(false);
    }
 
    function signOut() {
       setUser(null);
-      localStorage.removeItem('@dowhile:token');
+      localStorage.removeItem('@appFinance:token');
    }
 
    useEffect(() => {
-      const token = localStorage.getItem('@dowhile:token');
+      const token = localStorage.getItem('@appFinance:token');
 
       if (token) {
          api.defaults.headers.common.authorization = `Bearer ${token}`;
