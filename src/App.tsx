@@ -1,9 +1,10 @@
+import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { Dashboard } from './components/Dashboard';
 import { Header } from './components/Header';
 import { GlobalStyle } from './styles/global';
 import Modal from 'react-modal';
-
+import { ToastContainer } from 'react-toastify';
 import ThemeContext from './styles/themes/context';
 import usePersistedState from './util/usePersistentState';
 import dark from './styles/themes/dark';
@@ -33,6 +34,7 @@ export function App() {
       <Provider store={store}>
          <ThemeContext.Provider value={{ toggleTheme }}>
             <ThemeProvider theme={theme}>
+               <ToastContainer />
                {!!user ? (
                   <>
                      <Header />

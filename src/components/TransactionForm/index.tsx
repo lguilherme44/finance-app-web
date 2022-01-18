@@ -1,5 +1,6 @@
 import { Controller, useForm } from 'react-hook-form';
 import { Form } from './styles';
+import { toast } from 'react-toastify';
 /** datepicker */
 import DatePicker from 'react-datepicker';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -102,10 +103,12 @@ export function TransactionForm({
                placeholder="Descrição"
                {...register('description', { required: true })}
             />
+            {errors.description && <p>Preencha a descrição.</p>}
 
             <Controller
                name={'value'}
                control={control}
+               rules={{ required: true }}
                render={({ field: { onChange, onBlur, name, value, ref } }) => (
                   <NumberFormat
                      allowNegative={false}
@@ -123,6 +126,7 @@ export function TransactionForm({
                   />
                )}
             />
+            {errors.value && <p>Preencha o valor.</p>}
 
             <DatePicker
                locale="pt-BR"
@@ -130,10 +134,7 @@ export function TransactionForm({
                onChange={(date: Date) => setDate(date)}
                dateFormat="P"
             />
-
-            {errors.description && <span>Este campo é obrigatório.</span>}
-            {errors.type && <span>Este campo é obrigatório.</span>}
-            {errors.value && <span>Este campo é obrigatório.</span>}
+            {errors.date && <p>Escolha uma data.</p>}
 
             <button type="submit" form="hook-form">
                {isEditing ? 'Salvar' : 'Cadastrar'}
