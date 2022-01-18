@@ -9,6 +9,7 @@ export function addTransactionRequest(
       payload: {
          transaction,
       },
+      loading: true,
    };
 }
 
@@ -20,6 +21,7 @@ export function addTransactionSuccess(
       payload: {
          transaction,
       },
+      loading: false,
    };
 }
 
@@ -31,5 +33,6 @@ export function addTransactionFailure(
       payload: {
          transactionId,
       },
+      loading: false,
    };
 }

@@ -14,8 +14,26 @@ const transaction: Reducer<ITransactionState> = (
 ) => {
    return produce(state, (draft) => {
       switch (action.type) {
+         case ActionTypes.addTransactionRequest: {
+            return {
+               ...state,
+               loading: true,
+               error: false,
+            };
+         }
+
+         case ActionTypes.addTransactionFailure: {
+            return {
+               ...state,
+               loading: false,
+               error: true,
+            };
+         }
+
          case ActionTypes.addTransactionSuccess:
             draft.data.push(action.payload.transaction);
+            draft.loading = false;
+            draft.error = false;
             break;
 
          case ActionTypes.getTransactionSuccess: {

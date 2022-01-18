@@ -1,6 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
 import { Form } from './styles';
-import { toast } from 'react-toastify';
 /** datepicker */
 import DatePicker from 'react-datepicker';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -8,12 +7,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { registerLocale } from 'react-datepicker';
 import { useCallback, useEffect, useState } from 'react';
 import { format } from 'date-fns';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getTransactionRequest } from '../../store/modules/transaction/get/actions';
 import { ITransactionItem } from '../../store/modules/transaction/types';
 import { addTransactionRequest } from '../../store/modules/transaction/post/actions';
 import { updateTransactionRequest } from '../../store/modules/transaction/patch/actions';
 import NumberFormat from 'react-number-format';
+import { IState } from '../../store';
 
 registerLocale('pt-BR', ptBR);
 
@@ -29,6 +29,10 @@ export function TransactionForm({
    const dispatch = useDispatch();
    const [date, setDate] = useState(new Date());
    const [isEditing, setIsEditing] = useState(false);
+
+   const transactionLoading = useSelector<IState, boolean>(
+      (state) => state.transaction.loading
+   );
 
    const {
       register,
@@ -88,6 +92,10 @@ export function TransactionForm({
 
       onCloseModal();
    };
+
+   useEffect(() => {
+      console.log(transactionLoading);
+   }, [transactionLoading]);
 
    return (
       <>
