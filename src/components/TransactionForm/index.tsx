@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Form } from './styles';
 /** datepicker */
 import DatePicker from 'react-datepicker';
@@ -12,6 +12,7 @@ import { getTransactionRequest } from '../../store/modules/transaction/get/actio
 import { ITransactionItem } from '../../store/modules/transaction/types';
 import { addTransactionRequest } from '../../store/modules/transaction/post/actions';
 import { updateTransactionRequest } from '../../store/modules/transaction/patch/actions';
+import NumberFormat from 'react-number-format';
 
 registerLocale('pt-BR', ptBR);
 
@@ -33,6 +34,7 @@ export function TransactionForm({
       handleSubmit,
       formState: { errors },
       setValue,
+      control,
    } = useForm();
 
    useEffect(() => {
@@ -101,9 +103,25 @@ export function TransactionForm({
                {...register('description', { required: true })}
             />
 
-            <input
-               placeholder="Valor"
-               {...register('value', { required: true })}
+            <Controller
+               name={'value'}
+               control={control}
+               render={({ field: { onChange, onBlur, name, value, ref } }) => (
+                  <NumberFormat
+                     allowNegative={false}
+                     onValueChange={(values) => onChange(values.floatValue)}
+                     prefix="R$"
+                     name={name}
+                     value={value}
+                     onBlur={onBlur}
+                     ref={ref}
+                     placeholder="R$ 0,00"
+                     decimalScale={2}
+                     decimalSeparator=","
+                     thousandSeparator="."
+                     fixedDecimalScale
+                  />
+               )}
             />
 
             <DatePicker
