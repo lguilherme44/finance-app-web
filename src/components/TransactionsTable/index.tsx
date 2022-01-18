@@ -12,9 +12,10 @@ import { formatToBRL } from '../../util/appUtils';
 export function TransactionsTable() {
    const dispatch = useDispatch();
    const [showModal, setShowModal] = useState(false);
-   const transactionsData = useSelector<IState, ITransactionItem[]>((state) =>
-      state.transaction.data.flat()
+   const transactionsData = useSelector<IState, ITransactionItem[]>(
+      (state) => state.transaction.data
    );
+
    const [editTransaction, setEditTransaction] = useState<ITransactionItem>();
    return (
       <Container>
@@ -37,34 +38,35 @@ export function TransactionsTable() {
                </tr>
             </thead>
             <tbody>
-               {transactionsData?.map((transaction, index) => (
-                  <tr key={index}>
-                     <td className={transaction.type}>
-                        {transaction.description}
-                     </td>
-                     <td>{formatToBRL(transaction.value)}</td>
-                     <td>{transaction.date}</td>
-                     <td>
-                        <ButtonCustom
-                           onClick={() => {
-                              setShowModal(true);
-                              setEditTransaction(transaction);
-                           }}
-                        >
-                           <MdEdit color="#5429CC" />
-                        </ButtonCustom>
-                        <ButtonCustom
-                           onClick={() => {
-                              dispatch(
-                                 deleteTransactionRequest(transaction.id)
-                              );
-                           }}
-                        >
-                           <MdDelete color="#e52e4d" />
-                        </ButtonCustom>
-                     </td>
-                  </tr>
-               ))}
+               {transactionsData.length > 0 &&
+                  transactionsData?.map((transaction, index) => (
+                     <tr key={index}>
+                        <td className={transaction.type}>
+                           {transaction.description}
+                        </td>
+                        <td>{formatToBRL(transaction.value)}</td>
+                        <td>{transaction.date}</td>
+                        <td>
+                           <ButtonCustom
+                              onClick={() => {
+                                 setShowModal(true);
+                                 setEditTransaction(transaction);
+                              }}
+                           >
+                              <MdEdit color="#5429CC" />
+                           </ButtonCustom>
+                           <ButtonCustom
+                              onClick={() => {
+                                 dispatch(
+                                    deleteTransactionRequest(transaction.id)
+                                 );
+                              }}
+                           >
+                              <MdDelete color="#e52e4d" />
+                           </ButtonCustom>
+                        </td>
+                     </tr>
+                  ))}
             </tbody>
          </table>
       </Container>

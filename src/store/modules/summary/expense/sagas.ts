@@ -11,12 +11,6 @@ function* getSummaryExpense() {
       'summary/expense'
    );
 
-   const newData = response.data.data;
-
-   const data = newData.length > 0 ? response.data.data : [];
-
-   response.data.data = data;
-
    yield put(getSummaryExpenseSuccess(response.data));
 }
 
