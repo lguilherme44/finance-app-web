@@ -11,6 +11,7 @@ type User = {
 type AuthContextData = {
    user: User | null;
    signInUrl: string;
+   signInUrlDev: string;
    signOut: () => void;
    isLoading: boolean;
 };
@@ -36,6 +37,7 @@ export function AuthProvider({ children }: AuthProver) {
    const [isLoading, setIsLoading] = useState(false);
 
    const signInUrl = `${process.env.REACT_APP_SIGNIN_URL}${process.env.REACT_APP_CLIENT_ID}`;
+   const signInUrlDev = `${process.env.REACT_APP_SIGNIN_URL}${process.env.REACT_APP_CLIENT_ID_DEV}`;
 
    async function signIn(githubCode: string) {
       setIsLoading(true);
@@ -99,7 +101,9 @@ export function AuthProvider({ children }: AuthProver) {
    }, []);
 
    return (
-      <AuthContext.Provider value={{ signInUrl, user, signOut, isLoading }}>
+      <AuthContext.Provider
+         value={{ signInUrl, signInUrlDev, user, signOut, isLoading }}
+      >
          {children}
       </AuthContext.Provider>
    );

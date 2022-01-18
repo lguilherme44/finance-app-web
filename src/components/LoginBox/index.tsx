@@ -5,14 +5,17 @@ import Spinner from '../Spinner';
 import { LoginBoxWrapper, SiginWithGithub } from './styles';
 
 export function LoginBox() {
-   const { signInUrl, isLoading } = useContext(AuthContext);
+   const { signInUrl, signInUrlDev, isLoading } = useContext(AuthContext);
+
+   const urlToLogin =
+      process.env.REACT_APP_ENV === 'dev' ? signInUrlDev : signInUrl;
 
    return (
       <LoginBoxWrapper>
          {isLoading ? (
             <Spinner />
          ) : (
-            <SiginWithGithub href={signInUrl}>
+            <SiginWithGithub href={urlToLogin}>
                <VscGithubInverted size={24} />
                Entrar com github
             </SiginWithGithub>
