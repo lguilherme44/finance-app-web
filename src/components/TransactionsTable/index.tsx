@@ -45,65 +45,71 @@ export function TransactionsTable() {
                editTranscation={editTransaction}
             />
          </ModalCustom>
-         <table>
-            <thead>
-               <tr className="header-table">
-                  <th>Descrição</th>
-                  <th>Valor</th>
-                  <th>Data</th>
-                  <th>Opções</th>
-               </tr>
-            </thead>
-            <tbody>
-               {isLoading && (
-                  <div
-                     style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        position: 'absolute',
-                        left: 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0,
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                     }}
-                  >
-                     <Spinner />
-                  </div>
-               )}
+         <div
+            style={{
+               overflowX: 'auto',
+            }}
+         >
+            <table>
+               <thead>
+                  <tr className="header-table">
+                     <th>Descrição</th>
+                     <th>Valor</th>
+                     <th>Data</th>
+                     <th>Opções</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {isLoading && (
+                     <div
+                        style={{
+                           display: 'flex',
+                           justifyContent: 'center',
+                           alignItems: 'center',
+                           position: 'absolute',
+                           left: 0,
+                           right: 0,
+                           top: 0,
+                           bottom: 0,
+                           backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        }}
+                     >
+                        <Spinner />
+                     </div>
+                  )}
 
-               {transactionsData?.length > 0 &&
-                  transactionsData?.map((transaction, index) => (
-                     <tr key={index}>
-                        <td className={transaction.type}>
-                           {transaction.description}
-                        </td>
-                        <td>{formatToBRL(transaction.value)}</td>
-                        <td>{transaction.date}</td>
-                        <td>
-                           <ButtonCustom
-                              onClick={() => {
-                                 setShowModal(true);
-                                 setEditTransaction(transaction);
-                              }}
-                           >
-                              <MdEdit color="#5429CC" />
-                           </ButtonCustom>
-                           <ButtonCustom
-                              onClick={() => {
-                                 dispatch(
-                                    deleteTransactionRequest(transaction.id)
-                                 );
-                              }}
-                           >
-                              <MdDelete color="#e52e4d" />
-                           </ButtonCustom>
-                        </td>
-                     </tr>
-                  ))}
-            </tbody>
-         </table>
+                  {transactionsData?.length > 0 &&
+                     transactionsData?.map((transaction, index) => (
+                        <tr key={index}>
+                           <td className={transaction.type}>
+                              {transaction.description}
+                           </td>
+                           <td>{formatToBRL(transaction.value)}</td>
+                           <td>{transaction.date}</td>
+                           <td>
+                              <ButtonCustom
+                                 onClick={() => {
+                                    setShowModal(true);
+                                    setEditTransaction(transaction);
+                                 }}
+                              >
+                                 <MdEdit color="#5429CC" />
+                              </ButtonCustom>
+                              <ButtonCustom
+                                 onClick={() => {
+                                    dispatch(
+                                       deleteTransactionRequest(transaction.id)
+                                    );
+                                 }}
+                              >
+                                 <MdDelete color="#e52e4d" />
+                              </ButtonCustom>
+                           </td>
+                        </tr>
+                     ))}
+               </tbody>
+            </table>
+         </div>
       </Container>
    );
 }
