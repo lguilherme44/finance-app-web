@@ -88,7 +88,7 @@ export function TransactionForm({
 
       isEditing ? handleEditTransaction(data) : handleAddTransaction(data);
 
-      dispatch(getTransactionRequest());
+      // dispatch(getTransactionRequest());
 
       onCloseModal();
    };

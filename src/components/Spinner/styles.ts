@@ -4,8 +4,8 @@ export const SpinnerWrapper = styled.div`
    border: 10px solid var(--shape);
    border-top: 10px solid var(--green);
    border-radius: 50%;
-   width: 80px;
-   height: 80px;
+   width: 40px;
+   height: 40px;
    animation: spin 1s linear infinite;
 
    @keyframes spin {

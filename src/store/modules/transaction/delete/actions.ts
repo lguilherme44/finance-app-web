@@ -7,12 +7,14 @@ export function deleteTransactionRequest(id: string) {
       payload: {
          id,
       },
+      loading: true,
    };
 }
 
 export function deleteTransactionSuccess() {
    return {
       type: ActionTypes.deleteTransactionSuccess,
+      loading: false,
    };
 }
 
@@ -24,5 +26,6 @@ export function deleteTransactionFailure(
       payload: {
          transactionId,
       },
+      loading: false,
    };
 }

@@ -28,5 +28,6 @@ export interface ITransactionItem {
 export interface ITransactionState {
    data: ITransactionItem[];
    loading: boolean;
+   loadingDeleteTransaction: boolean;
    error: boolean;
 }

@@ -15,10 +15,12 @@ function* deleteTransaction({ payload }: deleteTransactionRequestProps) {
 
    yield call(api.delete, `transaction/${id}`);
 
-   yield put(getTransactionRequest());
-   yield put(deleteTransactionSuccess());
-   yield put(getSummaryExpenseRequest());
-   yield put(getSummaryIncomeRequest());
+   yield all([
+      put(deleteTransactionSuccess()),
+      put(getSummaryExpenseRequest()),
+      put(getSummaryIncomeRequest()),
+      put(getTransactionRequest()),
+   ]);
 }
 
 export default all([

@@ -6,6 +6,7 @@ const INITIAL_STATE: ITransactionState = {
    data: [],
    loading: false,
    error: false,
+   loadingDeleteTransaction: false,
 };
 
 const transaction: Reducer<ITransactionState> = (
@@ -14,6 +15,7 @@ const transaction: Reducer<ITransactionState> = (
 ) => {
    return produce(state, (draft) => {
       switch (action.type) {
+         // addTransaction
          case ActionTypes.addTransactionRequest: {
             return {
                ...state,
@@ -36,6 +38,32 @@ const transaction: Reducer<ITransactionState> = (
             draft.error = false;
             break;
 
+         // deleteTransaction
+         case ActionTypes.deleteTransactionRequest: {
+            return {
+               ...state,
+               loadingDeleteTransaction: true,
+               error: false,
+            };
+         }
+
+         case ActionTypes.deleteTransactionFailure: {
+            return {
+               ...state,
+               loadingDeleteTransaction: false,
+               error: true,
+            };
+         }
+
+         case ActionTypes.deleteTransactionSuccess: {
+            return {
+               ...state,
+               loadingDeleteTransaction: false,
+               error: false,
+            };
+         }
+
+         // getTransaction
          case ActionTypes.getTransactionSuccess: {
             return {
                ...state,
