@@ -42,3 +42,28 @@ export const SiginWithGithub = styled.a`
       margin-right: 13px;
    }
 `;
+
+export const SiginWithGoogle = styled.button`
+   background: var(--green);
+   margin-top: 32px;
+   padding: 0 40px;
+   height: 56px;
+   color: #09090a;
+   font-size: 14px;
+   font-weight: bold;
+   text-transform: uppercase;
+   text-decoration: none;
+   cursor: pointer;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   &:hover {
+      filter: brightness(0.9);
+   }
+
+   svg {
+      margin-right: 13px;
+   }
+`;

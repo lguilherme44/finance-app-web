@@ -1,4 +1,6 @@
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { createContext, ReactNode, useEffect, useState } from 'react';
+import { authFirebase } from '../config/firebase';
 import { api } from '../services/api';
 
 type User = {
@@ -13,6 +15,7 @@ type AuthContextData = {
    signInUrl: string;
    signInUrlDev: string;
    signOut: () => void;
+   handleLoginWithGoogle: () => void;
    isLoading: boolean;
 };
 
@@ -61,6 +64,27 @@ export function AuthProvider({ children }: AuthProver) {
       localStorage.removeItem('@appFinance:token');
    }
 
+   const handleLoginWithGoogle = () => {
+      const google_provider = new GoogleAuthProvider();
+
+      signInWithPopup(authFirebase, google_provider)
+         .then((result: any) => {
+            api.post<AuthResponse>('authenticate', {
+               code: result.user.uid,
+               type: 'google',
+            })
+               .then((response: any) => {
+                  setUser(response.user);
+               })
+               .catch((error: any) => {
+                  console.log(error);
+               });
+         })
+         .catch((error: any) => {
+            console.log(error);
+         });
+   };
+
    useEffect(() => {
       const token = localStorage.getItem('@appFinance:token');
 
@@ -102,7 +126,14 @@ export function AuthProvider({ children }: AuthProver) {
 
    return (
       <AuthContext.Provider
-         value={{ signInUrl, signInUrlDev, user, signOut, isLoading }}
+         value={{
+            signInUrl,
+            signInUrlDev,
+            user,
+            signOut,
+            isLoading,
+            handleLoginWithGoogle,
+         }}
       >
          {children}
       </AuthContext.Provider>
