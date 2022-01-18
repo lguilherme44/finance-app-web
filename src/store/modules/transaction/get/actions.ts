@@ -1,4 +1,4 @@
-import { ActionTypes, ITransactionItem } from '../types';
+import { ActionTypes, ITransactionState } from '../types';
 
 /** Get Transaction */
 export function getTransactionRequest() {
@@ -9,7 +9,7 @@ export function getTransactionRequest() {
    };
 }
 
-export function getTransactionSuccess(transaction: ITransactionItem) {
+export function getTransactionSuccess(transaction: ITransactionState) {
    return {
       type: ActionTypes.getTransactionSuccess,
       payload: transaction,
