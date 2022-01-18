@@ -12,7 +12,7 @@ declare module 'styled-components' {
          textDefault: string;
          textLight: string;
          text: string;
-
+         borderTable: string;
          background: string;
       };
    }

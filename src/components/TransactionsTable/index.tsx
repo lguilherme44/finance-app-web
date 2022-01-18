@@ -7,6 +7,7 @@ import { IState } from '../../store';
 import { ModalCustom } from '../ModalCustom';
 import { TransactionForm } from '../TransactionForm';
 import { deleteTransactionRequest } from '../../store/modules/transaction/delete/actions';
+import { formatToBRL } from '../../util/appUtils';
 
 export function TransactionsTable() {
    const dispatch = useDispatch();
@@ -41,9 +42,7 @@ export function TransactionsTable() {
                      <td className={transaction.type}>
                         {transaction.description}
                      </td>
-                     <td>
-                        R$ {transaction.value.toFixed(2).replace('.', ',')}
-                     </td>
+                     <td>{formatToBRL(transaction.value)}</td>
                      <td>{transaction.date}</td>
                      <td>
                         <ButtonCustom

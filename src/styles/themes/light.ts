@@ -13,7 +13,7 @@ export default {
       textDefault: shade(0.6, '#e3e3e3'),
       textLight: '#F2F2F7',
       text: '#7d7d7d',
-
+      borderTable: '#fff',
       background: '#d4d4d4',
    },
 };

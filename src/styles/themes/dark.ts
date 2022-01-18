@@ -14,5 +14,6 @@ export default {
       textLight: '#e3e3e3',
       background: '#1f1f1f',
       text: shade(0.2, '#e3e3e3'),
+      borderTable: shade(0.7, '#000'),
    },
 };
