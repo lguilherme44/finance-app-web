@@ -20,7 +20,7 @@ export const ButtonLogout = styled.button`
 
 export const ButtonNewTransaction = styled.button`
    font-size: 1rem;
-   color: ${(props) => props.theme.colors.textDefault};
+   color: ${(props) => props.theme.colors.text};
    background: ${(props) => props.theme.colors.primary};
    border: 0;
    padding: 0 2rem;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Form = styled.form`
    h2 {
-      color: ${(props) => props.theme.colors.textDefault};
+      color: ${(props) => props.theme.colors.text};
       font-size: 1.5rem;
       margin-bottom: 2rem;
    }

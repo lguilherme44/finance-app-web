@@ -8,7 +8,6 @@ import { registerLocale } from 'react-datepicker';
 import { useCallback, useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTransactionRequest } from '../../store/modules/transaction/get/actions';
 import { ITransactionItem } from '../../store/modules/transaction/types';
 import { addTransactionRequest } from '../../store/modules/transaction/post/actions';
 import { updateTransactionRequest } from '../../store/modules/transaction/patch/actions';
@@ -87,8 +86,6 @@ export function TransactionForm({
       };
 
       isEditing ? handleEditTransaction(data) : handleAddTransaction(data);
-
-      // dispatch(getTransactionRequest());
 
       onCloseModal();
    };
