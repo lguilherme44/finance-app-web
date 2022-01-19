@@ -6,8 +6,8 @@ import { api } from '../services/api';
 type User = {
    id: string;
    name: string;
-   login: string;
-   avatar_url: string;
+   email: string;
+   avatar: string;
 };
 
 type AuthContextData = {
@@ -26,12 +26,10 @@ type AuthProver = {
 };
 
 type AuthResponse = {
-   token: string;
    user: {
-      id: string;
-      avatar_url: string;
-      name: string;
-      login: string;
+      displayName: string;
+      email: string;
+      photoURL: string;
    };
 };
 
@@ -42,22 +40,22 @@ export function AuthProvider({ children }: AuthProver) {
    const signInUrl = `${process.env.REACT_APP_SIGNIN_URL}${process.env.REACT_APP_CLIENT_ID}`;
    const signInUrlDev = `${process.env.REACT_APP_SIGNIN_URL}${process.env.REACT_APP_CLIENT_ID_DEV}`;
 
-   async function signIn(githubCode: string) {
-      setIsLoading(true);
-      const response = await api.post<AuthResponse>('authenticate', {
-         code: githubCode,
-      });
+   // async function signIn(githubCode: string) {
+   //    setIsLoading(true);
+   //    const response = await api.post<AuthResponse>('authenticate', {
+   //       code: githubCode,
+   //    });
 
-      const { token, user } = response.data;
+   //    const { token, user } = response.data;
 
-      setUser(user);
+   //    setUser(user);
 
-      localStorage.setItem('@appFinance:token', token);
+   //    localStorage.setItem('@appFinance:token', token);
 
-      api.defaults.headers.common.authorization = `Bearer ${token}`;
+   //    api.defaults.headers.common.authorization = `Bearer ${token}`;
 
-      setIsLoading(false);
-   }
+   //    setIsLoading(false);
+   // }
 
    function signOut() {
       setUser(null);
@@ -69,45 +67,46 @@ export function AuthProvider({ children }: AuthProver) {
 
       signInWithPopup(authFirebase, google_provider)
          .then((result: any) => {
-            api.post<AuthResponse>('authenticate', {
-               code: result.user.uid,
-               type: 'google',
+            api.post('authenticate', {
+               name: result.user.displayName,
+               email: result.user.email,
+               avatar: result.user.photoURL,
             })
                .then((response: any) => {
-                  setUser(response.user);
+                  setUser(response.data);
                })
                .catch((error: any) => {
-                  console.log(error);
+                  console.log('error auth api', error);
                });
          })
          .catch((error: any) => {
-            console.log(error);
+            console.log('error auth google', error);
          });
    };
 
-   useEffect(() => {
-      const token = localStorage.getItem('@appFinance:token');
+   // useEffect(() => {
+   //    const token = localStorage.getItem('@appFinance:token');
 
-      if (token) {
-         api.defaults.headers.common.authorization = `Bearer ${token}`;
-         api.get<User>('profile').then((response) => {
-            setUser(response.data);
-         });
-      }
-   }, []);
+   //    if (token) {
+   //       api.defaults.headers.common.authorization = `Bearer ${token}`;
+   //       api.get<User>('profile').then((response) => {
+   //          setUser(response.data);
+   //       });
+   //    }
+   // }, []);
 
-   useEffect(() => {
-      const url = window.location.href;
-      const hasGithubCode = url.includes('?code=');
+   // useEffect(() => {
+   //    const url = window.location.href;
+   //    const hasGithubCode = url.includes('?code=');
 
-      if (hasGithubCode) {
-         const [urlWihoutCode, githubCode] = url.split('?code=');
+   //    if (hasGithubCode) {
+   //       const [urlWihoutCode, githubCode] = url.split('?code=');
 
-         window.history.pushState({}, '', urlWihoutCode);
+   //       window.history.pushState({}, '', urlWihoutCode);
 
-         signIn(githubCode);
-      }
-   }, []);
+   //       signIn(githubCode);
+   //    }
+   // }, []);
 
    useEffect(() => {
       api.interceptors.response.use(

@@ -1,9 +1,10 @@
 import { ActionTypes, ISummaryStateExpenseIncome } from '../types';
 
 /** Get Summary Income */
-export function getSummaryIncomeRequest() {
+export function getSummaryIncomeRequest(email: string) {
    return {
       type: ActionTypes.getSummaryIncomeRequest,
+      payload: email,
       loading: true,
       error: false,
    };

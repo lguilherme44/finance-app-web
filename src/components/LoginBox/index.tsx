@@ -17,10 +17,10 @@ export function LoginBox() {
             <Spinner />
          ) : (
             <>
-               <SiginWithGithub href={urlToLogin}>
+               {/* <SiginWithGithub href={urlToLogin}>
                   <VscGithubInverted size={24} />
                   Entrar com github
-               </SiginWithGithub>
+               </SiginWithGithub> */}
 
                <SiginWithGoogle onClick={handleLoginWithGoogle}>
                   <VscGithubInverted size={24} />

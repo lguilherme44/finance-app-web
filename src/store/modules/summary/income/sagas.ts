@@ -5,10 +5,11 @@ import { ActionTypes } from '../../summary/types';
 import { ISummaryStateExpenseIncome } from '../types';
 import { getSummaryIncomeSuccess } from './actions';
 
-function* getSummaryIncome() {
+function* getSummaryIncome(payload: any) {
    const response: AxiosResponse<ISummaryStateExpenseIncome> = yield call(
       api.get,
-      'summary/income'
+      'summary/income',
+      payload.email
    );
 
    yield put(getSummaryIncomeSuccess(response.data));

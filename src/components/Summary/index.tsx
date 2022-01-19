@@ -27,7 +27,7 @@ export function Summary() {
    }, [dispatch]);
 
    const getIncomeTotal = useCallback(() => {
-      dispatch(getSummaryIncomeRequest());
+      dispatch(getSummaryIncomeRequest('lguilherme44@gmail.com'));
    }, [dispatch]);
 
    useEffect(() => {

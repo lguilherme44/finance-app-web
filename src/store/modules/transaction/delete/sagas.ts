@@ -18,7 +18,7 @@ function* deleteTransaction({ payload }: deleteTransactionRequestProps) {
    yield all([
       put(deleteTransactionSuccess()),
       put(getSummaryExpenseRequest()),
-      put(getSummaryIncomeRequest()),
+      // put(getSummaryIncomeRequest()),
       put(getTransactionRequest()),
    ]);
 }

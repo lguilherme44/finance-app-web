@@ -26,6 +26,8 @@ export function App() {
    const { user } = useContext(AuthContext);
    const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', dark);
 
+   // console.log(user);
+
    function toggleTheme() {
       setTheme(theme.title === 'light' ? dark : light);
    }

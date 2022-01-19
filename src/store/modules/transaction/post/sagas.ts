@@ -19,7 +19,7 @@ function* addTransaction({ payload }: addTransactionRequestProps) {
 
    yield put(addTransactionSuccess(response.data));
    yield put(getSummaryExpenseRequest());
-   yield put(getSummaryIncomeRequest());
+   // yield put(getSummaryIncomeRequest());
 }
 
 export default all([

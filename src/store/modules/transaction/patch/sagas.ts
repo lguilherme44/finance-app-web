@@ -21,7 +21,7 @@ function* updateTransaction({ payload }: updatedTransactionRequest) {
    yield put(updateTransactionSuccess({ ...response.data }));
    yield put(getTransactionRequest());
    yield put(getSummaryExpenseRequest());
-   yield put(getSummaryIncomeRequest());
+   // yield put(getSummaryIncomeRequest());
 }
 
 export default all([
