@@ -39,18 +39,19 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: 400;
     }
 
-    table, caption, tbody, tfoot, thead, tr, th, td {
+    /* table, caption, tbody, tfoot, thead, tr, th, td {
         margin: 0;
         padding: 0;
         border: 0;
         font-size: 100%;
         font: inherit;
         vertical-align: baseline;
+    } */
+    
+    table {
+    border-collapse: collapse;
+    border-spacing: 0;
     }
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
 
     h1, h2, h3, h4, h5, h6, strong {
         font-weight: 600;

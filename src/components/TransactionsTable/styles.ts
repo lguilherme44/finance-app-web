@@ -11,6 +11,14 @@ export const Container = styled.div`
    td,
    th {
       border: 1px solid ${(props) => props.theme.colors.borderTable};
+
+      &.income {
+         border: 1px solid ${(props) => props.theme.colors.borderTable};
+      }
+
+      &.expense {
+         border: 1px solid ${(props) => props.theme.colors.borderTable};
+      }
    }
 
    table {
