@@ -1,20 +1,19 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './privateRoute';
-import { Dashboard } from '../components/Dashboard';
-import { Header } from '../components/Header';
-import { LoginBox } from '../components/LoginBox';
+import { LoginBoxComponent } from '../components/LoginBox';
+import { Layout } from '../components/Layout';
 
 const RoutesFunction = () => {
    return (
       <BrowserRouter>
          <Routes>
-            <Route index element={<LoginBox />} />
-            <Route path="/" element={<LoginBox />} />
+            <Route index element={<LoginBoxComponent />} />
+            <Route path="/" element={<LoginBoxComponent />} />
             <Route
                path="/dashboard"
                element={
                   <PrivateRoute>
-                     <Dashboard />
+                     <Layout />
                   </PrivateRoute>
                }
             />
