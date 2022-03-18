@@ -14,7 +14,7 @@ import { useContext } from 'react';
 /* tailwindcss */
 import './styles/tailwind.css';
 import { AuthContext } from './contexts/auth';
-import { LoginBox } from './components/LoginBox';
+import { LoginBoxComponent } from './components/LoginBox';
 
 /** redux */
 import { Provider } from 'react-redux';
@@ -41,7 +41,7 @@ export function App() {
                      <Dashboard />
                   </>
                ) : (
-                  <LoginBox />
+                  <LoginBoxComponent />
                )}
 
                <GlobalStyle />
