@@ -34,7 +34,7 @@ type AuthResponse = {
 
 export function AuthProvider({ children }: AuthProver) {
    const [user, setUser] = useState<User | null>(null);
-   const [isLoading, setIsLoading] = useState(false);
+   const [isLoading, setIsLoading] = useState(true);
 
    const signInUrl = `${process.env.REACT_APP_SIGNIN_URL}${process.env.REACT_APP_CLIENT_ID}`;
    const signInUrlDev = `${process.env.REACT_APP_SIGNIN_URL}${process.env.REACT_APP_CLIENT_ID_DEV}`;

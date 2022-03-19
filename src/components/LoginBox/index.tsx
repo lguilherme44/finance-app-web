@@ -94,7 +94,11 @@ export function LoginBoxComponent() {
                               touched.password &&
                               errors.password}
                         </label>
-                        <button type="submit" disabled={isSubmitting}>
+                        <button
+                           className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                           type="submit"
+                           disabled={isSubmitting}
+                        >
                            Entrar
                         </button>
                      </FormStyled>

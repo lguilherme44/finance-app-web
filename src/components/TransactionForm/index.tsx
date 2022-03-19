@@ -70,7 +70,7 @@ export function TransactionForm({
       }
    };
 
-   const onSubmit = ({ description, value, type }: ITransactionItem) => {
+   const onSubmit = ({ description, value, type }: any) => {
       const oldDate = date;
       const newDate = format(oldDate, 'dd/MM/yyyy');
       const valueString = value.toString();

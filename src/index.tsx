@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App';
 import { AuthProvider } from './contexts/auth';
+import './styles/tailwind.css';
 
 ReactDOM.render(
    <React.StrictMode>
