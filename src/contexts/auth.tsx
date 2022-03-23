@@ -1,4 +1,6 @@
+import { signOut } from 'firebase/auth';
 import { createContext, ReactNode, useEffect, useState } from 'react';
+import { auth } from '../config/firebase-config';
 import { api } from '../services/api';
 
 type User = {
@@ -10,9 +12,8 @@ type User = {
 
 type AuthContextData = {
    user: User | null;
-   signInUrl: string;
-   signInUrlDev: string;
-   signOut: () => void;
+   logout: () => void;
+   signIn: (name: string | undefined, email: string, avatar: string) => void;
    isLoading: boolean;
 };
 
@@ -24,7 +25,7 @@ type AuthProver = {
 
 type AuthResponse = {
    token: string;
-   user: {
+   userExist: {
       id: string;
       avatar_url: string;
       name: string;
@@ -36,18 +37,21 @@ export function AuthProvider({ children }: AuthProver) {
    const [user, setUser] = useState<User | null>(null);
    const [isLoading, setIsLoading] = useState(false);
 
-   const signInUrl = `${process.env.REACT_APP_SIGNIN_URL}${process.env.REACT_APP_CLIENT_ID}`;
-   const signInUrlDev = `${process.env.REACT_APP_SIGNIN_URL}${process.env.REACT_APP_CLIENT_ID_DEV}`;
-
-   async function signIn(githubCode: string) {
+   async function signIn(
+      name: string | undefined = '',
+      email: string,
+      avatar: string | undefined = ''
+   ) {
       setIsLoading(true);
-      const response = await api.post<AuthResponse>('authenticate', {
-         code: githubCode,
+      const response = await api.post<AuthResponse>('user/create', {
+         name,
+         email,
+         avatar,
       });
 
-      const { token, user } = response.data;
+      const { token, userExist } = response.data;
 
-      setUser(user);
+      setUser(userExist);
 
       localStorage.setItem('@appFinance:token', token);
 
@@ -56,9 +60,8 @@ export function AuthProvider({ children }: AuthProver) {
       setIsLoading(false);
    }
 
-   function signOut() {
-      setUser(null);
-      localStorage.removeItem('@appFinance:token');
+   function logout() {
+      signOut(auth);
    }
 
    useEffect(() => {
@@ -69,19 +72,6 @@ export function AuthProvider({ children }: AuthProver) {
          api.get<User>('profile').then((response) => {
             setUser(response.data);
          });
-      }
-   }, []);
-
-   useEffect(() => {
-      const url = window.location.href;
-      const hasGithubCode = url.includes('?code=');
-
-      if (hasGithubCode) {
-         const [urlWihoutCode, githubCode] = url.split('?code=');
-
-         window.history.pushState({}, '', urlWihoutCode);
-
-         signIn(githubCode);
       }
    }, []);
 
@@ -101,9 +91,7 @@ export function AuthProvider({ children }: AuthProver) {
    }, []);
 
    return (
-      <AuthContext.Provider
-         value={{ signInUrl, signInUrlDev, user, signOut, isLoading }}
-      >
+      <AuthContext.Provider value={{ user, logout, isLoading, signIn }}>
          {children}
       </AuthContext.Provider>
    );

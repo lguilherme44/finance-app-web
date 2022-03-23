@@ -1,11 +1,8 @@
 import { Formik } from 'formik';
 import { useContext } from 'react';
-import { AiFillGoogleCircle, AiFillGithub } from 'react-icons/ai';
+import { AiFillGoogleCircle } from 'react-icons/ai';
 import { AuthContext } from '../../contexts/auth';
-import {
-   logInWithEmailAndPassword,
-   signInWithGoogle,
-} from '../../config/firebase-config';
+import { logInWithEmailAndPassword } from '../../config/firebase-config';
 // import * as Yup from 'yup';
 import Spinner from '../Spinner';
 import {
@@ -16,9 +13,9 @@ import {
 } from './styles';
 import { useNavigate } from 'react-router-dom';
 
-export function LoginBoxComponent() {
+export function RegisterComponent() {
    const navigate = useNavigate();
-   const { isLoading, signIn } = useContext(AuthContext);
+   const { isLoading } = useContext(AuthContext);
 
    // const SignupSchema = Yup.object().shape({
    //    email: Yup.string()
@@ -30,14 +27,6 @@ export function LoginBoxComponent() {
    //       .max(50, 'Too Long!')
    //       .required('Required'),
    // });
-
-   const handleLoginWithGoogle = async () => {
-      const login = await signInWithGoogle();
-      if (login?.email) {
-         signIn(login.displayName || '', login.email, login.photoURL || '');
-         navigate('dashboard');
-      }
-   };
 
    return (
       <LoginBoxWrapper>
@@ -60,7 +49,7 @@ export function LoginBoxComponent() {
                      }
                      return errors;
                   }}
-                  onSubmit={(values, { setSubmitting }) => {
+                  onSubmit={(values) => {
                      logInWithEmailAndPassword(values.email, values.password);
                   }}
                >
@@ -102,21 +91,24 @@ export function LoginBoxComponent() {
                               touched.password &&
                               errors.password}
                         </label>
-                        {/* <button
-                           className="border-2 border-gray-100 rounded py-1 px-3"
+
+                        <button
+                           className="border-2 border-gray-100 rounded py-1 px-4"
+                           type="button"
+                           disabled={isSubmitting}
+                           onClick={() => {
+                              navigate('/');
+                           }}
+                        >
+                           Voltar
+                        </button>
+
+                        <button
+                           className="border-2 border-gray-100 rounded py-1 px-4"
                            type="submit"
                            disabled={isSubmitting}
                         >
-                           Entrar
-                        </button> */}
-
-                        <button
-                           className="border-2 border-gray-100 rounded py-1 px-3"
-                           type="button"
-                           disabled
-                           onClick={() => navigate('register')}
-                        >
-                           Registrar novo usuário (em breve)
+                           Cadastrar
                         </button>
                      </FormStyled>
                   )}
@@ -128,12 +120,7 @@ export function LoginBoxComponent() {
                      justifyContent: 'space-between',
                      gap: '1rem',
                   }}
-               >
-                  <LoginButton onClick={handleLoginWithGoogle} type="google">
-                     <AiFillGoogleCircle size={30} />
-                     Entrar com Google
-                  </LoginButton>
-               </div>
+               ></div>
             </WrapperContent>
          )}
       </LoginBoxWrapper>

@@ -23,7 +23,7 @@ export function Header() {
       SetIsNewTransactionModalOpen(false);
    }
 
-   const { signOut } = useContext(AuthContext);
+   const { logout } = useContext(AuthContext);
 
    return (
       <Container>
@@ -36,7 +36,7 @@ export function Header() {
             </ButtonNewTransaction>
 
             <ButtonLogout type="button">
-               <VscSignOut size={32} onClick={signOut} />
+               <VscSignOut size={32} onClick={logout} />
             </ButtonLogout>
 
             <ModalCustom

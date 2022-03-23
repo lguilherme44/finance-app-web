@@ -4,7 +4,6 @@ import {
    getAuth,
    signInWithPopup,
    signInWithEmailAndPassword,
-   createUserWithEmailAndPassword,
    sendPasswordResetEmail,
    signOut,
 } from 'firebase/auth';
@@ -64,26 +63,6 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
    }
 };
 
-const registerWithEmailAndPassword = async (
-   name: string,
-   email: string,
-   password: string
-) => {
-   try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      const user = res.user;
-      await addDoc(collection(db, 'users'), {
-         uid: user.uid,
-         name,
-         authProvider: 'local',
-         email,
-      });
-   } catch (err: any) {
-      console.error(err);
-      alert(err.message);
-   }
-};
-
 const sendPasswordReset = async (email: string) => {
    try {
       await sendPasswordResetEmail(auth, email);
@@ -103,7 +82,6 @@ export {
    db,
    signInWithGoogle,
    logInWithEmailAndPassword,
-   registerWithEmailAndPassword,
    sendPasswordReset,
    logout,
 };
