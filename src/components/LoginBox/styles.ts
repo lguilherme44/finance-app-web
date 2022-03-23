@@ -48,6 +48,8 @@ export const LoginButton = styled.a<LoginButtonProps>`
    align-items: center;
    justify-content: center;
 
+   cursor: pointer;
+
    &:hover {
       filter: brightness(0.9);
    }

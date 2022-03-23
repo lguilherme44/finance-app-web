@@ -1,7 +1,13 @@
 import { Formik } from 'formik';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AiFillGoogleCircle, AiFillGithub } from 'react-icons/ai';
 import { AuthContext } from '../../contexts/auth';
+import {
+   auth,
+   logInWithEmailAndPassword,
+   signInWithGoogle,
+} from '../../config/firebase-config';
+import { useAuthState } from 'react-firebase-hooks/auth';
 // import * as Yup from 'yup';
 import Spinner from '../Spinner';
 import {
@@ -10,9 +16,15 @@ import {
    WrapperContent,
    FormStyled,
 } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 export function LoginBoxComponent() {
    const { signInUrl, signInUrlDev, isLoading } = useContext(AuthContext);
+   const [user, loading, error] = useAuthState(auth);
+   const [email, setEmail] = useState('');
+   const [password, setPassword] = useState('');
+
+   const navigate = useNavigate();
 
    const urlToLogin =
       process.env.REACT_APP_ENV === 'dev' ? signInUrlDev : signInUrl;
@@ -50,10 +62,7 @@ export function LoginBoxComponent() {
                      return errors;
                   }}
                   onSubmit={(values, { setSubmitting }) => {
-                     setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                     }, 400);
+                     logInWithEmailAndPassword(values.email, values.password);
                   }}
                >
                   {({
@@ -117,7 +126,16 @@ export function LoginBoxComponent() {
                      Entrar com github
                   </LoginButton>
 
-                  <LoginButton href={urlToLogin} type="google">
+                  <LoginButton
+                     onClick={async () => {
+                        const login = await signInWithGoogle();
+                        console.log(login);
+                        if (login?.email) {
+                           navigate('dashboard');
+                        }
+                     }}
+                     type="google"
+                  >
                      <AiFillGoogleCircle size={30} />
                      Entrar com Google
                   </LoginButton>
