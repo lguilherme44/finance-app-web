@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import { useContext } from 'react';
 import { AiFillGoogleCircle, AiFillGithub } from 'react-icons/ai';
 import { AuthContext } from '../../contexts/auth';
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 import Spinner from '../Spinner';
 import {
    LoginBoxWrapper,
@@ -17,16 +17,16 @@ export function LoginBoxComponent() {
    const urlToLogin =
       process.env.REACT_APP_ENV === 'dev' ? signInUrlDev : signInUrl;
 
-   const SignupSchema = Yup.object().shape({
-      email: Yup.string()
-         .min(2, 'Too Short!')
-         .max(50, 'Too Long!')
-         .required('Required'),
-      password: Yup.string()
-         .min(2, 'Too Short!')
-         .max(50, 'Too Long!')
-         .required('Required'),
-   });
+   // const SignupSchema = Yup.object().shape({
+   //    email: Yup.string()
+   //       .min(2, 'Too Short!')
+   //       .max(50, 'Too Long!')
+   //       .required('Required'),
+   //    password: Yup.string()
+   //       .min(2, 'Too Short!')
+   //       .max(50, 'Too Long!')
+   //       .required('Required'),
+   // });
 
    return (
       <LoginBoxWrapper>
