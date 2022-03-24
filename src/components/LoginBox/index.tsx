@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import { useContext } from 'react';
-import { AiFillGoogleCircle, AiFillGithub } from 'react-icons/ai';
+import { AiFillGoogleCircle } from 'react-icons/ai';
 import { AuthContext } from '../../contexts/auth';
 import {
    logInWithEmailAndPassword,
@@ -18,18 +18,7 @@ import { useNavigate } from 'react-router-dom';
 
 export function LoginBoxComponent() {
    const navigate = useNavigate();
-   const { isLoading, signIn } = useContext(AuthContext);
-
-   // const SignupSchema = Yup.object().shape({
-   //    email: Yup.string()
-   //       .min(2, 'Too Short!')
-   //       .max(50, 'Too Long!')
-   //       .required('Required'),
-   //    password: Yup.string()
-   //       .min(2, 'Too Short!')
-   //       .max(50, 'Too Long!')
-   //       .required('Required'),
-   // });
+   const { loading, signIn } = useContext(AuthContext);
 
    const handleLoginWithGoogle = async () => {
       const login = await signInWithGoogle();
@@ -41,7 +30,7 @@ export function LoginBoxComponent() {
 
    return (
       <LoginBoxWrapper>
-         {isLoading ? (
+         {loading ? (
             <Spinner />
          ) : (
             <WrapperContent>

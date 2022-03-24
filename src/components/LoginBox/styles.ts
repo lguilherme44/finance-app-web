@@ -32,19 +32,19 @@ interface LoginButtonProps {
 }
 
 export const LoginButton = styled.a<LoginButtonProps>`
-   background: ${({ type }) =>
-      type === 'github' ? `var(--github-color)` : `var(--google-color)`};
-   margin-top: 32px;
-   padding: 0 40px;
-   height: 45px;
    color: #f5f5f5;
-   font-size: 0.8rem;
    font-weight: bold;
    text-transform: uppercase;
    text-decoration: none;
-   border-radius: 0.5rem;
    width: 100%;
-
+   padding: 0 1.2rem;
+   height: 4rem;
+   background: ${(props) => props.theme.colors.secondary};
+   border-radius: 0.25rem;
+   border: 0;
+   font-size: 1rem;
+   margin-top: 1.5rem;
+   font-weight: 600;
    display: flex;
    align-items: center;
    justify-content: center;
@@ -58,12 +58,14 @@ export const LoginButton = styled.a<LoginButtonProps>`
    svg {
       margin-right: 13px;
    }
+
+   transition: filter 0.2;
 `;
 
 export const FormStyled = styled.form`
    background: #fff;
    backdrop-filter: blur(0.25rem);
-   border-radius: 0.5rem;
+   border-radius: 0.25rem;
    padding: 2rem;
    text-align: left;
 

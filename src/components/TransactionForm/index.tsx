@@ -90,10 +90,6 @@ export function TransactionForm({
       onCloseModal();
    };
 
-   useEffect(() => {
-      console.log(transactionLoading);
-   }, [transactionLoading]);
-
    return (
       <>
          <Form onSubmit={handleSubmit(onSubmit)} id="hook-form">

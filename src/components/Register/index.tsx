@@ -15,22 +15,11 @@ import { useNavigate } from 'react-router-dom';
 
 export function RegisterComponent() {
    const navigate = useNavigate();
-   const { isLoading } = useContext(AuthContext);
-
-   // const SignupSchema = Yup.object().shape({
-   //    email: Yup.string()
-   //       .min(2, 'Too Short!')
-   //       .max(50, 'Too Long!')
-   //       .required('Required'),
-   //    password: Yup.string()
-   //       .min(2, 'Too Short!')
-   //       .max(50, 'Too Long!')
-   //       .required('Required'),
-   // });
+   const { loading } = useContext(AuthContext);
 
    return (
       <LoginBoxWrapper>
-         {isLoading ? (
+         {loading ? (
             <Spinner />
          ) : (
             <WrapperContent>

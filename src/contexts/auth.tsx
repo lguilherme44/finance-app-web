@@ -1,5 +1,6 @@
 import { signOut } from 'firebase/auth';
 import { createContext, ReactNode, useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../config/firebase-config';
 import { api } from '../services/api';
 
@@ -14,7 +15,7 @@ type AuthContextData = {
    user: User | null;
    logout: () => void;
    signIn: (name: string | undefined, email: string, avatar: string) => void;
-   isLoading: boolean;
+   loading: boolean;
 };
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -35,14 +36,13 @@ type AuthResponse = {
 
 export function AuthProvider({ children }: AuthProver) {
    const [user, setUser] = useState<User | null>(null);
-   const [isLoading, setIsLoading] = useState(false);
+   const [, loading] = useAuthState(auth);
 
    async function signIn(
       name: string | undefined = '',
       email: string,
       avatar: string | undefined = ''
    ) {
-      setIsLoading(true);
       const response = await api.post<AuthResponse>('user/create', {
          name,
          email,
@@ -56,24 +56,22 @@ export function AuthProvider({ children }: AuthProver) {
       localStorage.setItem('@appFinance:token', token);
 
       api.defaults.headers.common.authorization = `Bearer ${token}`;
-
-      setIsLoading(false);
    }
 
    function logout() {
       signOut(auth);
    }
 
-   useEffect(() => {
-      const token = localStorage.getItem('@appFinance:token');
+   // useEffect(() => {
+   //    const token = localStorage.getItem('@appFinance:token');
 
-      if (token) {
-         api.defaults.headers.common.authorization = `Bearer ${token}`;
-         api.get<User>('profile').then((response) => {
-            setUser(response.data);
-         });
-      }
-   }, []);
+   //    if (token) {
+   //       api.defaults.headers.common.authorization = `Bearer ${token}`;
+   //       api.get<User>('profile').then((response) => {
+   //          setUser(response.data);
+   //       });
+   //    }
+   // }, []);
 
    useEffect(() => {
       api.interceptors.response.use(
@@ -91,7 +89,7 @@ export function AuthProvider({ children }: AuthProver) {
    }, []);
 
    return (
-      <AuthContext.Provider value={{ user, logout, isLoading, signIn }}>
+      <AuthContext.Provider value={{ user, logout, signIn, loading }}>
          {children}
       </AuthContext.Provider>
    );
