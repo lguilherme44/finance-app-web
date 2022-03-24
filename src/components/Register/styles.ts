@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const LoginBoxWrapper = styled.div`
    height: 100vh;
    width: 100%;
-   background: linear-gradient(75deg, #17171a, #111314);
+   /* background: linear-gradient(75deg, #17171a, #111314); */
    text-align: center;
 
    display: flex;

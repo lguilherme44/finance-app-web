@@ -1,10 +1,9 @@
-import { SpinnerWrapper } from './styles';
+import { TailSpin } from 'react-loader-spinner';
+import { useTheme } from 'styled-components';
 
-const Spinner = () => (
-   <SpinnerWrapper
-      className="w-12 h-12 rounded-full animate-spin
-   border-y-8 border-solid border-purple-500 border-t-transparent shadow-md"
-   ></SpinnerWrapper>
-);
+const Spinner: React.FC = () => {
+   const theme = useTheme();
+   return <TailSpin color={theme.colors.secondary} height={55} width={55} />;
+};
 
 export default Spinner;

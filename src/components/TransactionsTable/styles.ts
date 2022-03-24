@@ -32,7 +32,7 @@ export const Container = styled.div`
       overflow: hidden;
 
       th {
-         color: ${(props) => props.theme.colors.text};
+         color: ${(props) => props.theme.colors.textHeaderTable};
          font-weight: 400;
          padding: 1rem 2rem;
          text-align: left;
@@ -41,7 +41,7 @@ export const Container = styled.div`
 
       td {
          padding: 0 2rem;
-         color: ${(props) => props.theme.colors.text};
+         color: ${(props) => props.theme.colors.textHeaderTable};
          text-align: inherit;
          display: table-cell;
 

@@ -4,8 +4,9 @@ import {
    Content,
    ButtonLogout,
    ButtonNewTransaction,
+   LogoStyled,
 } from './styles';
-
+import Logo from '../../assets/logo-invertido.png';
 import { VscSignOut } from 'react-icons/vsc';
 import { AuthContext } from '../../contexts/auth';
 import { ModalCustom } from '../ModalCustom';
@@ -28,6 +29,7 @@ export function Header() {
    return (
       <Container>
          <Content>
+            <LogoStyled width={120} src={Logo} alt="Finance Control" />
             <ButtonNewTransaction
                type="button"
                onClick={handleOpenNewTransactionModal}

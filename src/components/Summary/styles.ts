@@ -34,7 +34,7 @@ export const Container = styled.div`
          font-size: 2rem;
          font-weight: 500;
          line-height: 3rem;
-         color: ${(props) => props.theme.colors.text};
+         color: ${(props) => props.theme.colors.textHeaderTable};
       }
 
       &.highlight-background {

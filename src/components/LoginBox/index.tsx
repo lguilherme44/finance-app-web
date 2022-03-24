@@ -6,14 +6,15 @@ import {
    logInWithEmailAndPassword,
    signInWithGoogle,
 } from '../../config/firebase-config';
-// import * as Yup from 'yup';
 import Spinner from '../Spinner';
 import {
    LoginBoxWrapper,
    LoginButton,
    WrapperContent,
    FormStyled,
+   BoxLogin,
 } from './styles';
+import Logo from '../../assets/logo-3.png';
 import { useNavigate } from 'react-router-dom';
 
 export function LoginBoxComponent() {
@@ -34,6 +35,25 @@ export function LoginBoxComponent() {
             <Spinner />
          ) : (
             <WrapperContent>
+               {/* <img
+                  src={Logo}
+                  alt="Finance App"
+                  className="object-cover h-20 w-10"
+               /> */}
+               <img
+                  style={{
+                     width: '350px',
+                     height: 'auto',
+
+                     borderTopLeftRadius: '1rem',
+                     borderTopRightRadius: '1rem',
+                     // paddingBottom: '1.2rem',
+                     marginLeft: 'auto',
+                     marginRight: 'auto',
+                  }}
+                  src={Logo}
+                  alt="Finance App"
+               />
                <Formik
                   initialValues={{ email: '', password: '' }}
                   validate={(values) => {
@@ -110,19 +130,12 @@ export function LoginBoxComponent() {
                      </FormStyled>
                   )}
                </Formik>
-               <div
-                  style={{
-                     display: 'flex',
-                     flexDirection: 'row',
-                     justifyContent: 'space-between',
-                     gap: '1rem',
-                  }}
-               >
+               <BoxLogin>
                   <LoginButton onClick={handleLoginWithGoogle} type="google">
                      <AiFillGoogleCircle size={30} />
                      Entrar com Google
                   </LoginButton>
-               </div>
+               </BoxLogin>
             </WrapperContent>
          )}
       </LoginBoxWrapper>

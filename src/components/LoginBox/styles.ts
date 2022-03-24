@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const LoginBoxWrapper = styled.div`
    height: 100vh;
    width: 100%;
-   background: linear-gradient(75deg, #17171a, #111314);
+   background: #fff;
    text-align: center;
 
    display: flex;
@@ -27,6 +27,14 @@ export const WrapperContent = styled.div`
    padding: 0 1rem;
 `;
 
+export const BoxLogin = styled.div`
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   gap: 1rem;
+   padding: 0 2rem;
+`;
+
 interface LoginButtonProps {
    type: string;
 }
@@ -38,12 +46,12 @@ export const LoginButton = styled.a<LoginButtonProps>`
    text-decoration: none;
    width: 100%;
    padding: 0 1.2rem;
-   height: 4rem;
+   height: 3rem;
    background: ${(props) => props.theme.colors.secondary};
    border-radius: 0.25rem;
    border: 0;
    font-size: 1rem;
-   margin-top: 1.5rem;
+
    font-weight: 600;
    display: flex;
    align-items: center;
@@ -65,9 +73,10 @@ export const LoginButton = styled.a<LoginButtonProps>`
 export const FormStyled = styled.form`
    background: #fff;
    backdrop-filter: blur(0.25rem);
-   border-radius: 0.25rem;
    padding: 2rem;
    text-align: left;
+   border-top-right-radius: 0;
+   border-top-left-radius: 0;
 
    label {
       color: #444;

@@ -12,8 +12,10 @@ declare module 'styled-components' {
          textDefault: string;
          textLight: string;
          text: string;
+         textHeaderTable: string;
          borderTable: string;
          background: string;
+         backgroundHeader: string;
       };
    }
 }
