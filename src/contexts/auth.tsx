@@ -62,16 +62,13 @@ export function AuthProvider({ children }: AuthProver) {
       signOut(auth);
    }
 
-   // useEffect(() => {
-   //    const token = localStorage.getItem('@appFinance:token');
+   useEffect(() => {
+      const token = localStorage.getItem('@appFinance:token');
 
-   //    if (token) {
-   //       api.defaults.headers.common.authorization = `Bearer ${token}`;
-   //       api.get<User>('profile').then((response) => {
-   //          setUser(response.data);
-   //       });
-   //    }
-   // }, []);
+      if (token) {
+         api.defaults.headers.common.authorization = `Bearer ${token}`;
+      }
+   }, []);
 
    useEffect(() => {
       api.interceptors.response.use(
