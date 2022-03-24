@@ -1,19 +1,12 @@
 import { Formik } from 'formik';
 import { useContext } from 'react';
-import { AiFillGoogleCircle } from 'react-icons/ai';
 import { AuthContext } from '../../contexts/auth';
 import { logInWithEmailAndPassword } from '../../config/firebase-config';
-// import * as Yup from 'yup';
 import Spinner from '../Spinner';
-import {
-   LoginBoxWrapper,
-   LoginButton,
-   WrapperContent,
-   FormStyled,
-} from './styles';
+import { LoginBoxWrapper, WrapperContent, FormStyled } from './styles';
 import { useNavigate } from 'react-router-dom';
 
-export function RegisterComponent() {
+export default function RegisterComponent() {
    const navigate = useNavigate();
    const { loading } = useContext(AuthContext);
 

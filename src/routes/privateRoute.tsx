@@ -3,7 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import { auth } from '../config/firebase-config';
 
-export function PrivateRoute({ children }: { children: JSX.Element }) {
+export default function PrivateRoute({ children }: { children: JSX.Element }) {
    const location = useLocation();
    const [user, loading] = useAuthState(auth);
 

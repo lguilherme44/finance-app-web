@@ -17,7 +17,7 @@ import {
 import Logo from '../../assets/logo-3.png';
 import { useNavigate } from 'react-router-dom';
 
-export function LoginBoxComponent() {
+export default function LoginBoxComponent() {
    const navigate = useNavigate();
    const { loading, signIn } = useContext(AuthContext);
 

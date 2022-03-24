@@ -1,7 +1,7 @@
 import { Dashboard } from './Dashboard';
 import { Header } from './Header';
 
-export function Layout() {
+export default function Layout() {
    return (
       <>
          <Header />
