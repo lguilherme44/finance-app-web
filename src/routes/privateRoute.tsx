@@ -8,18 +8,7 @@ export function PrivateRoute({ children }: { children: JSX.Element }) {
    const [user, loading] = useAuthState(auth);
 
    if (loading) {
-      return (
-         <div
-            style={{
-               display: 'flex',
-               justifyContent: 'center',
-               alignItems: 'center',
-               height: '100vh',
-            }}
-         >
-            <Spinner />;
-         </div>
-      );
+      return <Spinner />;
    }
 
    if (!user) {

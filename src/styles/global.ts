@@ -124,7 +124,7 @@ export const GlobalStyle = createGlobalStyle`
    .react-modal-content {
       width: 100%;
       max-width: 576px;
-      background: ${(props) => props.theme.colors.background};
+      background: #f5f5f5;
       padding: 3rem;
       position: relative;
       border-radius: 0.25rem;
