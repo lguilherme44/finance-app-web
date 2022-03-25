@@ -61,7 +61,9 @@ export function AuthProvider({ children }: AuthProver) {
    }
 
    function logout() {
-      localStorage.clear();
+      localStorage.removeItem('@appFinance:token');
+      localStorage.removeItem('@appFinance:theme');
+
       signOut(auth);
    }
 

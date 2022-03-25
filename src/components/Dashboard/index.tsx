@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { memo, useContext, useEffect } from 'react';
 import { ThemeContext } from 'styled-components';
 import { Summary } from '../Summary';
 import { TransactionsTable } from '../TransactionsTable';
@@ -6,15 +6,15 @@ import { Container, Footer } from './styles';
 import { shade } from 'polished';
 import { useDispatch } from 'react-redux';
 import { getTransactionRequest } from '../../store/modules/transaction/get/actions';
+import { getSummaryIncomeRequest } from '../../store/modules/summary/income/actions';
+import { getSummaryExpenseRequest } from '../../store/modules/summary/expense/actions';
 import ThemeCustomDefault from '../../styles/themes/context';
 import Switch from 'react-switch';
 import { AuthContext } from '../../contexts/auth';
-import { getSummaryIncomeRequest } from '../../store/modules/summary/income/actions';
-import { getSummaryExpenseRequest } from '../../store/modules/summary/expense/actions';
 
 export function Dashboard() {
-   const { user } = useContext(AuthContext);
    const dispatch = useDispatch();
+   const { user } = useContext(AuthContext);
    const { title } = useContext(ThemeContext);
    const { toggleTheme } = useContext(ThemeCustomDefault);
 
@@ -46,3 +46,5 @@ export function Dashboard() {
       </Container>
    );
 }
+
+export default memo(Dashboard);

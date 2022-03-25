@@ -16,7 +16,10 @@ import store from './store';
 Modal.setAppElement('#root');
 
 export function App() {
-   const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', dark);
+   const [theme, setTheme] = usePersistedState<DefaultTheme>(
+      '@appFinance:theme',
+      dark
+   );
 
    function toggleTheme() {
       setTheme(theme.title === 'light' ? dark : light);

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, memo } from 'react';
 import {
    Container,
    Content,
@@ -11,7 +11,6 @@ import { VscSignOut } from 'react-icons/vsc';
 import { AuthContext } from '../../contexts/auth';
 import { ModalCustom } from '../ModalCustom';
 import { TransactionForm } from '../TransactionForm';
-import { useDispatch } from 'react-redux';
 
 export function Header() {
    const [isNewTransactionModalOpen, SetIsNewTransactionModalOpen] =
@@ -57,3 +56,5 @@ export function Header() {
       </Container>
    );
 }
+
+export default memo(Header);

@@ -1,11 +1,21 @@
-import { Dashboard } from './Dashboard';
-import { Header } from './Header';
+import { lazy, Suspense } from 'react';
+import Spinner from './Spinner';
+const Header = lazy(() => import('./Header'));
+const Dashboard = lazy(() => import('./Dashboard'));
 
 export default function Layout() {
    return (
       <>
-         <Header />
-         <Dashboard />
+         <Suspense
+            fallback={
+               <>
+                  <Spinner />
+               </>
+            }
+         >
+            <Header />
+            <Dashboard />
+         </Suspense>
       </>
    );
 }

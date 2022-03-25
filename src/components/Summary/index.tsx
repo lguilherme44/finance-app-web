@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 import totalImg from '../../assets/total.svg';
+import { auth } from '../../config/firebase-config';
 import { IState } from '../../store';
 import { getSummaryExpenseRequest } from '../../store/modules/summary/expense/actions';
 import { getSummaryIncomeRequest } from '../../store/modules/summary/income/actions';
@@ -12,12 +14,14 @@ import { Container } from './styles';
 
 export function Summary() {
    const dispatch = useDispatch();
+   const user = useAuthState(auth);
    const [totalSummary, setTotalSummary] = useState(0);
    const [showCardWarningExpense, setShowCardWarningExpense] = useState(false);
 
    const summaryExpenseData = useSelector<IState, ISummaryExpenseIncome[]>(
       (state) => state.summaryExpense.data.sort()
    );
+
    const summaryIncomeData = useSelector<IState, ISummaryExpenseIncome[]>(
       (state: IState) => state.summaryIncome.data
    );
@@ -33,7 +37,7 @@ export function Summary() {
    useEffect(() => {
       getExpenseTotal();
       getIncomeTotal();
-   }, [getExpenseTotal, getIncomeTotal]);
+   }, [getExpenseTotal, getIncomeTotal, user]);
 
    useEffect(() => {
       const expense = summaryExpenseData[0]?._sum?.value;
