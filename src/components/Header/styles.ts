@@ -52,6 +52,15 @@ export const Content = styled.div`
    grid-row-gap: 0px;
 
    align-items: center;
+
+   @media (max-width: 768px) {
+      display: flex;
+      margin-bottom: 1rem;
+
+      img {
+         display: none;
+      }
+   }
 `;
 
 export const LogoStyled = styled.img`

@@ -30,7 +30,12 @@ export function Header() {
    return (
       <Container>
          <Content>
-            <LogoStyled width={200} src={Logo} alt="Finance Control" />
+            <LogoStyled
+               className="md:invisible"
+               width={200}
+               src={Logo}
+               alt="Finance Control"
+            />
             <ButtonNewTransaction
                type="button"
                onClick={handleOpenNewTransactionModal}
