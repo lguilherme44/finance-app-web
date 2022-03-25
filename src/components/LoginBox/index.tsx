@@ -32,7 +32,7 @@ export default function LoginBoxComponent() {
 
    // acorda heroku, preguiçoso
    async function wakeHeroku() {
-      await api.get('transactions');
+      await api.get('/');
    }
 
    useEffect(() => {
