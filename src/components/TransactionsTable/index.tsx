@@ -50,7 +50,7 @@ export function TransactionsTable() {
                overflowX: 'auto',
             }}
          >
-            <table>
+            <table className="table-auto">
                <thead>
                   <tr className="header-table">
                      <th>Descrição</th>
