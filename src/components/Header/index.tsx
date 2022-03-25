@@ -11,6 +11,7 @@ import { VscSignOut } from 'react-icons/vsc';
 import { AuthContext } from '../../contexts/auth';
 import { ModalCustom } from '../ModalCustom';
 import { TransactionForm } from '../TransactionForm';
+import { useDispatch } from 'react-redux';
 
 export function Header() {
    const [isNewTransactionModalOpen, SetIsNewTransactionModalOpen] =
@@ -29,7 +30,7 @@ export function Header() {
    return (
       <Container>
          <Content>
-            <LogoStyled width={120} src={Logo} alt="Finance Control" />
+            <LogoStyled width={200} src={Logo} alt="Finance Control" />
             <ButtonNewTransaction
                type="button"
                onClick={handleOpenNewTransactionModal}

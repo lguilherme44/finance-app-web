@@ -9,10 +9,11 @@ type User = {
    name: string;
    login: string;
    avatar_url: string;
+   email: string;
 };
 
 type AuthContextData = {
-   user: User | null;
+   user: User;
    logout: () => void;
    signIn: (name: string | undefined, email: string, avatar: string) => void;
    loading: boolean;
@@ -31,11 +32,12 @@ type AuthResponse = {
       avatar_url: string;
       name: string;
       login: string;
+      email: string;
    };
 };
 
 export function AuthProvider({ children }: AuthProver) {
-   const [user, setUser] = useState<User | null>(null);
+   const [user, setUser] = useState<User>({} as User);
    const [, loading] = useAuthState(auth);
 
    async function signIn(
@@ -59,6 +61,7 @@ export function AuthProvider({ children }: AuthProver) {
    }
 
    function logout() {
+      localStorage.clear();
       signOut(auth);
    }
 
@@ -68,7 +71,7 @@ export function AuthProvider({ children }: AuthProver) {
       if (token) {
          api.defaults.headers.common.authorization = `Bearer ${token}`;
       }
-   }, []);
+   }, [user]);
 
    useEffect(() => {
       api.interceptors.response.use(
@@ -77,7 +80,7 @@ export function AuthProvider({ children }: AuthProver) {
          },
          function (error) {
             if (401 === error.response.status) {
-               setUser(null);
+               setUser({} as User);
             } else {
                return Promise.reject(error);
             }

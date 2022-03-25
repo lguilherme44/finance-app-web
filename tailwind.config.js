@@ -1,7 +1,9 @@
 module.exports = {
-   purge: [],
-   darkMode: false, // or 'media' or 'class'
-   content: ['./src/**/*.{js,jsx,ts,tsx}'],
+   content: [
+      // Example content paths...
+      './public/**/*.html',
+      './src/**/*.{js,jsx,ts,tsx,vue}',
+   ],
    theme: {
       extend: {},
       screens: {
@@ -14,9 +16,6 @@ module.exports = {
          desktop: '1280px',
          // => @media (min-width: 1280px) { ... }
       },
-   },
-   variants: {
-      extend: {},
    },
    plugins: [],
 };

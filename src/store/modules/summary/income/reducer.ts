@@ -14,12 +14,26 @@ const summaryIncome: Reducer<ISummaryStateExpenseIncome> = (
 ) => {
    return produce(state, (draft) => {
       switch (action.type) {
+         case ActionTypes.getSummaryExpenseRequest: {
+            return {
+               ...state,
+               loading: true,
+            };
+         }
          case ActionTypes.getSummaryIncomeSuccess: {
             return {
                ...state,
                data: action.payload,
+               loading: false,
             };
          }
+         case ActionTypes.getSummaryIncomeFailure: {
+            return {
+               ...state,
+               error: true,
+            };
+         }
+
          default: {
             return draft;
          }

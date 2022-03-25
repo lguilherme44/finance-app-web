@@ -6,6 +6,7 @@ export const Container = styled.div`
    overflow-x: auto;
    display: grid;
    grid-template-rows: 1fr auto;
+   font-size: 1.12rem;
 
    table,
    td,

@@ -1,5 +1,5 @@
 import { Formik } from 'formik';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 import { AuthContext } from '../../contexts/auth';
 import {
@@ -16,6 +16,7 @@ import {
 } from './styles';
 import Logo from '../../assets/logo-3.png';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../../services/api';
 
 export default function LoginBoxComponent() {
    const navigate = useNavigate();
@@ -29,31 +30,28 @@ export default function LoginBoxComponent() {
       }
    };
 
+   // acorda heroku, preguiçoso
+   async function wakeHeroku() {
+      await api.get('transactions');
+   }
+
+   useEffect(() => {
+      wakeHeroku();
+   }, []);
+
    return (
       <LoginBoxWrapper>
          {loading ? (
             <Spinner />
          ) : (
             <WrapperContent>
-               {/* <img
-                  src={Logo}
-                  alt="Finance App"
-                  className="object-cover h-20 w-10"
-               /> */}
-               <img
-                  style={{
-                     width: '350px',
-                     height: 'auto',
-
-                     borderTopLeftRadius: '1rem',
-                     borderTopRightRadius: '1rem',
-                     // paddingBottom: '1.2rem',
-                     marginLeft: 'auto',
-                     marginRight: 'auto',
-                  }}
-                  src={Logo}
-                  alt="Finance App"
-               />
+               <div className="ax-w-md mx-auto">
+                  <img
+                     className="h-48 w-full object-cover md:h-full md:w-48"
+                     src={Logo}
+                     alt="Finance App"
+                  />
+               </div>
                <Formik
                   initialValues={{ email: '', password: '' }}
                   validate={(values) => {
