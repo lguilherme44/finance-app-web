@@ -109,14 +109,14 @@ export default function LoginBoxComponent() {
                      ) : (
                         <>
                            <button
-                              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded space-x-1"
+                              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded space-x-1"
                               type="submit"
                            >
                               Entrar
                            </button>
 
                            <button
-                              className="text-base ml-5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                              className="text-base ml-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                               type="button"
                               onClick={() => navigate('register')}
                            >

@@ -85,7 +85,7 @@ export default function RegisterComponent() {
                      </button>
 
                      <button
-                        className=" bg-blue-600 ml-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded space-x-1"
+                        className=" bg-blue-500 ml-5 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded space-x-1"
                         type="submit"
                      >
                         Cadastrar
