@@ -92,7 +92,11 @@ export function TransactionForm({
 
    return (
       <>
-         <Form onSubmit={handleSubmit(onSubmit)} id="hook-form">
+         <Form
+            autoComplete="off"
+            onSubmit={handleSubmit(onSubmit)}
+            id="hook-form"
+         >
             <h2>{isEditing ? 'Editar transação' : 'Cadastrar transação'}</h2>
 
             <select defaultValue={'expense'} {...register('type')}>
