@@ -1,4 +1,4 @@
-import { useContext, useState, memo } from 'react';
+import { useContext, useState } from 'react';
 import {
    Container,
    Content,
@@ -57,4 +57,4 @@ export function Header() {
    );
 }
 
-export default memo(Header);
+export default Header;

@@ -1,28 +1,15 @@
-import { memo, useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { Summary } from '../Summary';
 import { TransactionsTable } from '../TransactionsTable';
 import { Container, Footer } from './styles';
 import { shade } from 'polished';
-import { useDispatch } from 'react-redux';
-import { getTransactionRequest } from '../../store/modules/transaction/get/actions';
-import { getSummaryIncomeRequest } from '../../store/modules/summary/income/actions';
-import { getSummaryExpenseRequest } from '../../store/modules/summary/expense/actions';
 import ThemeCustomDefault from '../../styles/themes/context';
 import Switch from 'react-switch';
-import { AuthContext } from '../../contexts/auth';
 
 export function Dashboard() {
-   const dispatch = useDispatch();
-   const { user } = useContext(AuthContext);
    const { title } = useContext(ThemeContext);
    const { toggleTheme } = useContext(ThemeCustomDefault);
-
-   // useEffect(() => {
-   //    dispatch(getTransactionRequest());
-   //    dispatch(getSummaryIncomeRequest());
-   //    dispatch(getSummaryExpenseRequest());
-   // }, [dispatch, user]);
 
    return (
       <Container>
@@ -47,4 +34,4 @@ export function Dashboard() {
    );
 }
 
-export default memo(Dashboard);
+export default Dashboard;

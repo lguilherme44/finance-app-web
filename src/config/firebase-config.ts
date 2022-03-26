@@ -6,15 +6,9 @@ import {
    signInWithEmailAndPassword,
    sendPasswordResetEmail,
    signOut,
+   createUserWithEmailAndPassword,
 } from 'firebase/auth';
-import {
-   getFirestore,
-   query,
-   getDocs,
-   collection,
-   where,
-   addDoc,
-} from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
    apiKey: 'AIzaSyCpuTs2lxIx4kWERMjG8JOMJhpjrzLlEQA',
@@ -36,19 +30,27 @@ const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
    try {
       const res = await signInWithPopup(auth, googleProvider);
-      const user = res.user;
-      return user;
+
+      if (res) {
+         const user = res.user;
+         return user;
+      }
    } catch (err: any) {
-      console.error(err);
       alert(err.message);
    }
 };
 
 const logInWithEmailAndPassword = async (email: string, password: string) => {
    try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      if (res) {
+         const user = res.user;
+
+         console.log(res);
+
+         return user;
+      }
    } catch (err: any) {
-      console.error(err);
       alert(err.message);
    }
 };

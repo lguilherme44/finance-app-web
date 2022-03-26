@@ -2,10 +2,7 @@ import { Formik } from 'formik';
 import { useContext, useEffect } from 'react';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 import { AuthContext } from '../../contexts/auth';
-import {
-   logInWithEmailAndPassword,
-   signInWithGoogle,
-} from '../../config/firebase-config';
+import { signInWithGoogle } from '../../config/firebase-config';
 import Spinner from '../Spinner';
 import {
    LoginBoxWrapper,
@@ -55,20 +52,20 @@ export default function LoginBoxComponent() {
                <Formik
                   initialValues={{ email: '', password: '' }}
                   validate={(values) => {
-                     const errors = {} as any;
-                     if (!values.email) {
-                        errors.email = 'Required';
-                     } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                           values.email
-                        )
-                     ) {
-                        errors.email = 'E-mail inválido.';
-                     }
-                     return errors;
+                     // const errors = {} as any;
+                     // if (!values.email) {
+                     //    errors.email = 'Required';
+                     // } else if (
+                     //    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                     //       values.email
+                     //    )
+                     // ) {
+                     //    errors.email = 'E-mail inválido.';
+                     // }
+                     // return errors;
                   }}
-                  onSubmit={(values, { setSubmitting }) => {
-                     logInWithEmailAndPassword(values.email, values.password);
+                  onSubmit={(values) => {
+                     // logInWithEmailAndPassword(values.email, values.password);
                   }}
                >
                   {({
@@ -78,10 +75,9 @@ export default function LoginBoxComponent() {
                      handleChange,
                      handleBlur,
                      handleSubmit,
-                     isSubmitting,
                      /* and other goodies */
                   }) => (
-                     <FormStyled onSubmit={handleSubmit}>
+                     <FormStyled autoComplete="off" onSubmit={handleSubmit}>
                         <label htmlFor="input-email">
                            E-mail
                            <input

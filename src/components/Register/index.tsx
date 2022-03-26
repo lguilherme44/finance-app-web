@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function RegisterComponent() {
    const navigate = useNavigate();
+   const { signIn } = useContext(AuthContext);
    const { loading } = useContext(AuthContext);
 
    return (
@@ -18,21 +19,20 @@ export default function RegisterComponent() {
             <WrapperContent>
                <Formik
                   initialValues={{ email: '', password: '' }}
-                  validate={(values) => {
-                     const errors = {} as any;
-                     if (!values.email) {
-                        errors.email = 'Required';
-                     } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                           values.email
-                        )
-                     ) {
-                        errors.email = 'E-mail inválido.';
+                  validate={() => {}}
+                  onSubmit={async (values) => {
+                     const login = await logInWithEmailAndPassword(
+                        values.email,
+                        values.password
+                     );
+                     if (login?.email) {
+                        signIn(
+                           login.displayName || '',
+                           login.email,
+                           login.photoURL || ''
+                        );
+                        navigate('/dashboard');
                      }
-                     return errors;
-                  }}
-                  onSubmit={(values) => {
-                     logInWithEmailAndPassword(values.email, values.password);
                   }}
                >
                   {({
@@ -45,7 +45,7 @@ export default function RegisterComponent() {
                      isSubmitting,
                      /* and other goodies */
                   }) => (
-                     <FormStyled onSubmit={handleSubmit}>
+                     <FormStyled onSubmit={handleSubmit} autoComplete="off">
                         <label htmlFor="input-email">
                            E-mail
                            <input
