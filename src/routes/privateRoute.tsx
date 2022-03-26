@@ -7,8 +7,8 @@ import { AuthContext } from '../contexts/auth';
 
 export default function PrivateRoute({ children }: { children: JSX.Element }) {
    const location = useLocation();
-   const { isLogged, loading } = useContext(AuthContext);
-   const [user] = useAuthState(auth);
+   const { isLogged } = useContext(AuthContext);
+   const [user, loading] = useAuthState(auth);
 
    if (loading) {
       return <Spinner />;
