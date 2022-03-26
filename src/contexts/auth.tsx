@@ -3,6 +3,7 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../config/firebase-config';
 import { api } from '../services/api';
+import usePersistentState from '../util/usePersistentState';
 
 type User = {
    id: string;
@@ -18,6 +19,7 @@ type AuthContextData = {
    signIn: (name: string | undefined, email: string, avatar: string) => void;
    loading: boolean;
    isLoading: boolean;
+   isLogged: boolean;
 };
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -40,6 +42,10 @@ type AuthResponse = {
 export function AuthProvider({ children }: AuthProver) {
    const [user, setUser] = useState<User>({} as User);
    const [isLoading, setIsLoading] = useState(false);
+   const [isLogged, setIsLogged] = usePersistentState(
+      '@appFinance:isLogged',
+      false
+   );
    const [, loading] = useAuthState(auth);
 
    async function signIn(
@@ -62,6 +68,8 @@ export function AuthProvider({ children }: AuthProver) {
 
             setUser(userExist);
 
+            setIsLogged(true);
+
             localStorage.setItem('@appFinance:token', token);
 
             api.defaults.headers.common.authorization = `Bearer ${token}`;
@@ -78,7 +86,7 @@ export function AuthProvider({ children }: AuthProver) {
    function logout() {
       localStorage.removeItem('@appFinance:token');
       localStorage.removeItem('@appFinance:theme');
-
+      setIsLogged(false);
       signOut(auth);
    }
 
@@ -86,6 +94,8 @@ export function AuthProvider({ children }: AuthProver) {
       const token = localStorage.getItem('@appFinance:token');
 
       if (token) {
+         console.log('entrou');
+         setIsLogged(true);
          api.defaults.headers.common.authorization = `Bearer ${token}`;
       }
    }, [user]);
@@ -96,9 +106,8 @@ export function AuthProvider({ children }: AuthProver) {
             return response;
          },
          function (error) {
-            if (401 === error.response.status) {
-               setUser({} as User);
-            } else {
+            if (error.response.status === 401) {
+               alert('Token expirado');
                return Promise.reject(error);
             }
          }
@@ -107,7 +116,7 @@ export function AuthProvider({ children }: AuthProver) {
 
    return (
       <AuthContext.Provider
-         value={{ user, logout, signIn, loading, isLoading }}
+         value={{ user, logout, signIn, loading, isLoading, isLogged }}
       >
          {children}
       </AuthContext.Provider>

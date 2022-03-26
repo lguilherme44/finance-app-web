@@ -11,7 +11,7 @@ const RoutesFunction = () => {
    return (
       <BrowserRouter>
          <Routes>
-            <Route
+            {/* <Route
                index
                element={
                   <Suspense
@@ -24,7 +24,7 @@ const RoutesFunction = () => {
                      <LoginBoxComponent />
                   </Suspense>
                }
-            />
+            /> */}
             <Route
                path="/"
                element={

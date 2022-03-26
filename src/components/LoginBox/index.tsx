@@ -20,7 +20,13 @@ import Spinner from '../Spinner';
 
 export default function LoginBoxComponent() {
    const navigate = useNavigate();
-   const { signIn, isLoading } = useContext(AuthContext);
+   const { signIn, isLoading, isLogged } = useContext(AuthContext);
+
+   useEffect(() => {
+      if (isLogged) {
+         navigate('/dashboard');
+      }
+   }, [isLogged, navigate]);
 
    const handleLoginWithGoogle = async () => {
       const login = await signInWithGoogle();
