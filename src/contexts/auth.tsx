@@ -53,11 +53,13 @@ export function AuthProvider({ children }: AuthProver) {
 
       const { token, userExist } = response.data;
 
-      setUser(userExist);
+      if (token) {
+         setUser(userExist);
 
-      localStorage.setItem('@appFinance:token', token);
+         localStorage.setItem('@appFinance:token', token);
 
-      api.defaults.headers.common.authorization = `Bearer ${token}`;
+         api.defaults.headers.common.authorization = `Bearer ${token}`;
+      }
    }
 
    function logout() {

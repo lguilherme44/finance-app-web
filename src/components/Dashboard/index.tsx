@@ -18,11 +18,11 @@ export function Dashboard() {
    const { title } = useContext(ThemeContext);
    const { toggleTheme } = useContext(ThemeCustomDefault);
 
-   useEffect(() => {
-      dispatch(getTransactionRequest());
-      dispatch(getSummaryIncomeRequest());
-      dispatch(getSummaryExpenseRequest());
-   }, [dispatch, user]);
+   // useEffect(() => {
+   //    dispatch(getTransactionRequest());
+   //    dispatch(getSummaryIncomeRequest());
+   //    dispatch(getSummaryExpenseRequest());
+   // }, [dispatch, user]);
 
    return (
       <Container>

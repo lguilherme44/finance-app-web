@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Container, ButtonCustom } from './styles';
 import { MdEdit, MdDelete } from 'react-icons/md';
 import { ITransactionItem } from '../../store/modules/transaction/types';
@@ -9,9 +9,12 @@ import { TransactionForm } from '../TransactionForm';
 import { deleteTransactionRequest } from '../../store/modules/transaction/delete/actions';
 import { formatToBRL } from '../../util/appUtils';
 import Spinner from '../Spinner';
+import { getTransactionRequest } from '../../store/modules/transaction/get/actions';
+import { AuthContext } from '../../contexts/auth';
 
 export function TransactionsTable() {
    const dispatch = useDispatch();
+   const { user } = useContext(AuthContext);
    const [showModal, setShowModal] = useState(false);
    const [isLoading, setIsLoading] = useState(false);
    const transactionsData = useSelector<IState, ITransactionItem[]>(
@@ -24,6 +27,14 @@ export function TransactionsTable() {
    const deleteTransactionLoading = useSelector<IState, boolean>(
       (state) => state.transaction.loadingDeleteTransaction
    );
+
+   const getTransactions = useCallback(() => {
+      dispatch(getTransactionRequest());
+   }, [dispatch]);
+
+   useEffect(() => {
+      getTransactions();
+   }, [getTransactions, user]);
 
    useEffect(() => {
       if (transactionLoading || deleteTransactionLoading) {

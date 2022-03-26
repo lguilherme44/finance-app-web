@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 import totalImg from '../../assets/total.svg';
 import { auth } from '../../config/firebase-config';
+import { AuthContext } from '../../contexts/auth';
 import { IState } from '../../store';
 import { getSummaryExpenseRequest } from '../../store/modules/summary/expense/actions';
 import { getSummaryIncomeRequest } from '../../store/modules/summary/income/actions';
@@ -14,7 +15,7 @@ import { Container } from './styles';
 
 export function Summary() {
    const dispatch = useDispatch();
-   const user = useAuthState(auth);
+   const { user } = useContext(AuthContext);
    const [totalSummary, setTotalSummary] = useState(0);
    const [showCardWarningExpense, setShowCardWarningExpense] = useState(false);
 
