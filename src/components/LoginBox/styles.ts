@@ -42,7 +42,6 @@ interface LoginButtonProps {
 export const LoginButton = styled.a<LoginButtonProps>`
    color: #f5f5f5;
    font-weight: bold;
-   text-transform: uppercase;
    text-decoration: none;
    width: 100%;
    padding: 0 1.2rem;
@@ -73,7 +72,7 @@ export const LoginButton = styled.a<LoginButtonProps>`
 export const FormStyled = styled.form`
    background: #fff;
    backdrop-filter: blur(0.25rem);
-   padding: 2rem;
+   padding: 1rem 2rem;
    text-align: left;
    border-top-right-radius: 0;
    border-top-left-radius: 0;

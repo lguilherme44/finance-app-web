@@ -17,6 +17,7 @@ type AuthContextData = {
    logout: () => void;
    signIn: (name: string | undefined, email: string, avatar: string) => void;
    loading: boolean;
+   isLoading: boolean;
 };
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -38,6 +39,7 @@ type AuthResponse = {
 
 export function AuthProvider({ children }: AuthProver) {
    const [user, setUser] = useState<User>({} as User);
+   const [isLoading, setIsLoading] = useState(false);
    const [, loading] = useAuthState(auth);
 
    async function signIn(
@@ -46,6 +48,7 @@ export function AuthProvider({ children }: AuthProver) {
       avatar: string | undefined = ''
    ) {
       try {
+         setIsLoading(true);
          const response = await api.post<AuthResponse>('user/create', {
             name,
             email,
@@ -55,15 +58,19 @@ export function AuthProvider({ children }: AuthProver) {
          const { token, userExist } = response.data;
 
          if (token) {
+            setIsLoading(false);
+
             setUser(userExist);
 
             localStorage.setItem('@appFinance:token', token);
 
             api.defaults.headers.common.authorization = `Bearer ${token}`;
          }
+         setIsLoading(false);
 
          return userExist;
       } catch (error) {
+         setIsLoading(false);
          console.log(error);
       }
    }
@@ -99,7 +106,9 @@ export function AuthProvider({ children }: AuthProver) {
    }, []);
 
    return (
-      <AuthContext.Provider value={{ user, logout, signIn, loading }}>
+      <AuthContext.Provider
+         value={{ user, logout, signIn, loading, isLoading }}
+      >
          {children}
       </AuthContext.Provider>
    );
