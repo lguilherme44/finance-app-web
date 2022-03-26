@@ -10,7 +10,7 @@ export const ButtonLogout = styled.button`
    color: ${({ theme }) => theme.colors.textHeaderTable};
    left: 24px;
    top: 24px;
-   margin-left: auto;
+   margin-left: 1rem;
 
    cursor: pointer;
 
@@ -18,6 +18,10 @@ export const ButtonLogout = styled.button`
 
    &:hover {
       filter: brightness(0.9);
+   }
+
+   @media (max-width: 768px) {
+      margin-left: auto;
    }
 `;
 
@@ -47,7 +51,7 @@ export const Content = styled.div`
    width: 100%;
 
    display: grid;
-   grid-template-columns: 3fr 1fr 1fr;
+   grid-template-columns: 3fr 1fr;
    grid-column-gap: 0px;
    grid-row-gap: 0px;
 
@@ -55,7 +59,7 @@ export const Content = styled.div`
 
    @media (max-width: 768px) {
       display: flex;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
 
       img {
          display: none;

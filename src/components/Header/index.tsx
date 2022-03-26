@@ -43,7 +43,7 @@ export function Header() {
             </ButtonNewTransaction>
 
             <ButtonLogout type="button">
-               <VscSignOut size={32} onClick={logout} />
+               <VscSignOut size={36} onClick={logout} />
             </ButtonLogout>
 
             <ModalCustom
