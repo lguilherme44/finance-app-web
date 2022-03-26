@@ -40,9 +40,16 @@ const signInWithGoogle = async () => {
    }
 };
 
-const logInWithEmailAndPassword = async (email: string, password: string) => {
+const logInWithEmailAndPassword = async (
+   email: string,
+   password: string,
+   type: 'register' | 'login'
+) => {
    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const res =
+         type === 'register'
+            ? await createUserWithEmailAndPassword(auth, email, password)
+            : await signInWithEmailAndPassword(auth, email, password);
       if (res) {
          const user = res.user;
 

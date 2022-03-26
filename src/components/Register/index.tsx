@@ -23,7 +23,8 @@ export default function RegisterComponent() {
                   onSubmit={async (values) => {
                      const login = await logInWithEmailAndPassword(
                         values.email,
-                        values.password
+                        values.password,
+                        'register'
                      );
                      if (login?.email) {
                         signIn(

@@ -2,7 +2,10 @@ import { Formik } from 'formik';
 import { useContext, useEffect } from 'react';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 import { AuthContext } from '../../contexts/auth';
-import { signInWithGoogle } from '../../config/firebase-config';
+import {
+   logInWithEmailAndPassword,
+   signInWithGoogle,
+} from '../../config/firebase-config';
 import Spinner from '../Spinner';
 import {
    LoginBoxWrapper,
@@ -64,8 +67,21 @@ export default function LoginBoxComponent() {
                      // }
                      // return errors;
                   }}
-                  onSubmit={(values) => {
-                     // logInWithEmailAndPassword(values.email, values.password);
+                  onSubmit={async (values) => {
+                     const login = await logInWithEmailAndPassword(
+                        values.email,
+                        values.password,
+                        'login'
+                     );
+
+                     if (login?.email) {
+                        signIn(
+                           login.displayName || '',
+                           login.email,
+                           login.photoURL || ''
+                        );
+                        navigate('/dashboard');
+                     }
                   }}
                >
                   {({
@@ -105,21 +121,19 @@ export default function LoginBoxComponent() {
                               touched.password &&
                               errors.password}
                         </label>
-                        {/* <button
+                        <button
                            className="border-2 border-gray-100 rounded py-1 px-3"
                            type="submit"
-                           disabled={isSubmitting}
                         >
                            Entrar
-                        </button> */}
+                        </button>
 
                         <button
                            className="border-2 border-gray-100 rounded py-1 px-3"
                            type="button"
-                           disabled
                            onClick={() => navigate('register')}
                         >
-                           Registrar novo usuário (em breve)
+                           Registrar novo usuário
                         </button>
                      </FormStyled>
                   )}

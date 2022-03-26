@@ -45,20 +45,26 @@ export function AuthProvider({ children }: AuthProver) {
       email: string,
       avatar: string | undefined = ''
    ) {
-      const response = await api.post<AuthResponse>('user/create', {
-         name,
-         email,
-         avatar,
-      });
+      try {
+         const response = await api.post<AuthResponse>('user/create', {
+            name,
+            email,
+            avatar,
+         });
 
-      const { token, userExist } = response.data;
+         const { token, userExist } = response.data;
 
-      if (token) {
-         setUser(userExist);
+         if (token) {
+            setUser(userExist);
 
-         localStorage.setItem('@appFinance:token', token);
+            localStorage.setItem('@appFinance:token', token);
 
-         api.defaults.headers.common.authorization = `Bearer ${token}`;
+            api.defaults.headers.common.authorization = `Bearer ${token}`;
+         }
+
+         return userExist;
+      } catch (error) {
+         console.log(error);
       }
    }
 
